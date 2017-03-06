@@ -43,4 +43,14 @@ function popFront() {
     return url;
 }
 
+function pushBackFromContext(context) {
+    pushBack(context.linkUrl);
+}
+
+chrome.contextMenus.create({
+    title: 'Push to back of queue',
+    contexts: ['link'],
+    onclick: pushBackFromContext
+});
+
 refreshBadgeText();

@@ -15,9 +15,9 @@
     ]
   },
   "permissions": [
-    "notifications",
     "tabs",
-    "storage"
+    "storage",
+    "contextMenus"
   ],
   "browser_action": {
     "default_icon": {
