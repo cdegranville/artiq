@@ -8,9 +8,13 @@ function ChromePromisifier(originalMethod) {
         var args = [].slice.call(arguments);
         var self = this;
         return new Promise(function(resolve, reject) {
-            // Get the arguments passed to the original method, appends the
-            // resolve function to the end, and calls the original method
-            args.push(resolve);
+            args.push(function(response) {
+                if (!response) {
+                    reject(chrome.runtime.lastError);
+                } else {
+                    resolve(response);
+                }
+            });
             originalMethod.apply(self, args);
         });
     };
