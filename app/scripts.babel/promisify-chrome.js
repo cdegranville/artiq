@@ -7,9 +7,9 @@ function ChromePromisifier(originalMethod) {
     return function promisified() {
         var args = [].slice.call(arguments);
         var self = this;
-        return new Promise(function(resolve, reject) {
-            args.push(function(response) {
-                if (!response) {
+        return new Promise((resolve, reject) => {
+            args.push((response) => {
+                if (chrome.runtime.lastError) {
                     reject(chrome.runtime.lastError);
                 } else {
                     resolve(response);
@@ -22,5 +22,10 @@ function ChromePromisifier(originalMethod) {
 
 // Promisify the Chrome tabs APIs
 Promise.promisifyAll(chrome.tabs, {
+    promisifier: ChromePromisifier
+});
+
+// Promisify the Chrome local storage APIs
+Promise.promisifyAll(chrome.storage.local, {
     promisifier: ChromePromisifier
 });
