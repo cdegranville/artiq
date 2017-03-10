@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    describe('Given a list', function() {
+    describe('Given a value', function() {
         describe('that is falsy', function() {
             describe('when the article queue constructor is called', function() {
                 it('should default to an empty queue', function() {

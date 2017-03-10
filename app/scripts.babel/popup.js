@@ -1,51 +1,38 @@
 'use strict';
 
-function guid() {
-    return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() +
-        s4() + s4();
-}
-
-function s4() {
-    return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
-}
-
-function pushBack(req) {
+function pushBack(context) {
     chrome.tabs.queryAsync({'active': true, 'lastFocusedWindow': true}).then((tabs) => {
-        req['url'] = tabs[0].url;
-        console.log('%s Pushing article to back of queue: %s', req.id, req.url);
-        return chrome.extension.getBackgroundPage().pushBack(req);
+        var req = {url: tabs[0].url};
+        context.log('Pushing article to back of queue:', req.url);
+        return chrome.extension.getBackgroundPage().pushBack(req, context);
     }).then(() => {
-        console.log('%s Successfully pushed article to back of queue', req.id);
+        context.log('Successfully pushed article to back of queue');
     }).catch((rejected) => {
-        console.error('%s %s', req.id, rejected.message);
+        context.error(rejected.message);
     });
 }
 
-function popFront(req) {
+function popFront(context) {
     var tabId;
     chrome.tabs.queryAsync({'active': true, 'lastFocusedWindow': true}).then((tabs) => {
         tabId = tabs[0].id;
-        console.log('%s Popping article from front of queue', req.id);
-        return chrome.extension.getBackgroundPage().popFront(req);
+        context.log('Popping article from front of queue');
+        return chrome.extension.getBackgroundPage().popFront({}, context);
     }).then((url) => {
-        console.log('%s Successfully popped article from front of queue: %s', req.id, url);
+        context.log('Successfully popped article from front of queue:', url);
 
         if (url) {
             chrome.tabs.update(tabId, {url: url});
         }
     }).catch((rejected) => {
-        console.error('%s %s', req.id, rejected.message);
+        context.error(rejected.message);
     });
 }
 
 document.getElementById('pushBack').addEventListener('click', () => {
-    pushBack({
-        id: guid()
-    });
+    pushBack(new Context());
 });
 
 document.getElementById('popFront').addEventListener('click', () => {
-    popFront({
-        id: guid()
-    });
+    popFront(new Context());
 });

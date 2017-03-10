@@ -12,6 +12,7 @@
     "scripts": [
       "bower_components/bluebird/js/browser/bluebird.js",
       "scripts/promisify-chrome.js",
+      "scripts/context.js",
       "scripts/article-queue.js",
       "scripts/article-queue-store.js",
       "scripts/background.js"
