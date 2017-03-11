@@ -9,13 +9,13 @@
     <script src="../app/bower_components/jasmine-core/lib/jasmine-core/jasmine-html.js"></script>
     <script src="../app/bower_components/jasmine-core/lib/jasmine-core/boot.js"></script>
 
-    <!-- include links to other tests... -->
-    <div>
-        <ul>
-            <li><a href="context-spec.html">context-spec</a></li>
-            <li><a href="popup-spec.html">popup-spec</a></li>
-            <li><a href="article-queue-spec.html">article-queue-spec</a></li>
-        </ul>
-    </div>
+    <div id="pushBack"></div><div id="popFront"></div>
+
+    <!-- include source files here... -->
+    <script src="../app/bower_components/bluebird/js/browser/bluebird.js"></script>
+    <script src="../app/scripts/popup.js"></script>
+
+    <!-- include spec files here... -->
+    <script src="spec/popup-spec.js"></script>
   </body>
 </html>
