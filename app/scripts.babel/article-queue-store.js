@@ -8,16 +8,14 @@ function ArticleQueueStore() {
         /**
          * Gets the article queue associated with the given key from the store.
          *
-         * TODO: Return undefined if an article queue is not present for the
-         * key instead of an empty queue.
-         *
          * @param key A key string.
          * @return The article queue associated with the key or undefined if
          * one could not be found.
          */
         get: (key) => {
             return chrome.storage.local.getAsync(key).then((items) => {
-                return new ArticleQueue(items[key]);
+                var list = items[key];
+                return list ? new ArticleQueue(list) : undefined;
             });
         },
 

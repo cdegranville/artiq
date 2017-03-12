@@ -16,7 +16,7 @@ function init(details) {
     var version = previousVersion || currentVersion;
     console.log('Loading queue for version', version);
     artiqStore.get(version).then((q) => {
-        artiq = q;
+        artiq = q || new ArticleQueue();
         console.log('Refreshing displayed queue size to', artiq.size());
         refreshBadgeText();
     }).catch((rejected) => {
