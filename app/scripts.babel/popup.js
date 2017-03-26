@@ -2,7 +2,7 @@
 
 function pushBack(context) {
     chrome.tabs.queryAsync({'active': true, 'lastFocusedWindow': true}).then((tabs) => {
-        var req = {url: tabs[0].url};
+        const req = {url: tabs[0].url};
         context.log('Pushing article to back of queue:', req.url);
         return chrome.extension.getBackgroundPage().pushBack(req, context);
     }).then(() => {
@@ -13,7 +13,7 @@ function pushBack(context) {
 }
 
 function popFront(context) {
-    var tabId;
+    let tabId;
     chrome.tabs.queryAsync({'active': true, 'lastFocusedWindow': true}).then((tabs) => {
         tabId = tabs[0].id;
         context.log('Popping article from front of queue');

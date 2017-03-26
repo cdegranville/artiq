@@ -7,7 +7,7 @@
  * queue.
  */
 function ArticleQueue(list) {
-    var queue = list ? list.slice() : [];
+    const queue = list ? list.slice() : [];
 
     return {
         /**

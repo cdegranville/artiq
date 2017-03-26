@@ -14,7 +14,7 @@ function ArticleQueueStore() {
          */
         get: (key) => {
             return chrome.storage.local.getAsync(key).then((items) => {
-                var list = items[key];
+                const list = items[key];
                 return list ? new ArticleQueue(list) : undefined;
             });
         },
@@ -26,7 +26,7 @@ function ArticleQueueStore() {
          * @param artiq An article queue.
          */
         put: (key, artiq) => {
-            var keyValue = {};
+            const keyValue = {};
             keyValue[key] = artiq.toList();
             return chrome.storage.local.setAsync(keyValue);
         }

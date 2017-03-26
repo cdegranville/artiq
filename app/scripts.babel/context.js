@@ -15,7 +15,7 @@ function Context() {
     }
 
     // Generate a unique request id
-    var reqId = guid();
+    const reqId = guid();
 
     return {
         /**
@@ -29,7 +29,7 @@ function Context() {
          * Logs an info message.
          */
         log: function() {
-            var args = Array.prototype.slice.call(arguments);
+            const args = Array.prototype.slice.call(arguments);
             args.unshift('(' + reqId + ')');
             console.log.apply(console, args);
         },
@@ -38,7 +38,7 @@ function Context() {
          * Logs an error message.
          */
         error: function() {
-            var args = Array.prototype.slice.call(arguments);
+            const args = Array.prototype.slice.call(arguments);
             args.unshift('(' + reqId + ')');
             console.error.apply(console, args);
         }
